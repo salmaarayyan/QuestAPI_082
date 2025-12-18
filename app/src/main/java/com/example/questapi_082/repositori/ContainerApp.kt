@@ -6,6 +6,7 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import kotlin.getValue
 
 interface ContainerApp{
     val repositorySiswa: RepositoryDataSiswa
@@ -34,6 +35,12 @@ class DefaultContainerApp : ContainerApp{
         )
         .client(klien)
         .build()
+
+    private val retrofitService: ServiceApiSiswa by lazy {
+        retrofit.create(ServiceApiSiswa::class.java)
+    }
+
+
 
 }
 
