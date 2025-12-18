@@ -11,7 +11,7 @@ import retrofit2.Retrofit
 import kotlin.getValue
 
 interface ContainerApp{
-    val repositorySiswa: RepositoryDataSiswa
+    val repositoryDataSiswa: RepositoryDataSiswa
 }
 
 class DefaultContainerApp : ContainerApp{
@@ -42,7 +42,7 @@ class DefaultContainerApp : ContainerApp{
         retrofit.create(ServiceApiSiswa::class.java)
     }
 
-    override val repositorySiswa: RepositoryDataSiswa by lazy {
+    override val repositoryDataSiswa: RepositoryDataSiswa by lazy {
         JaringanRepositoryDataSiswa(retrofitService) }
 }
 
