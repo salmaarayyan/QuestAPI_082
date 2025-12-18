@@ -1,5 +1,6 @@
 package com.example.questapi_082.repositori
 
+import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 
 interface ContainerApp{
@@ -13,4 +14,10 @@ class DefaultContainerApp : ContainerApp{
         level= HttpLoggingInterceptor.Level.BODY
 
     }
+
+    val klien = OkHttpClient.Builder()
+        .addInterceptor(logging)
+        .build()
+
+
 }
