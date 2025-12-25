@@ -1,4 +1,6 @@
+@file:OptIn(InternalSerializationApi::class)
 package com.example.questapi_082.viewmodel
+
 
 import android.annotation.SuppressLint
 import androidx.compose.runtime.getValue
@@ -9,11 +11,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.questapi_082.modeldata.DataSiswa
 import com.example.questapi_082.repositori.RepositoryDataSiswa
+import com.example.questapi_082.uicontroller.route.DestinasiDetail
 import kotlinx.coroutines.launch
 import kotlinx.serialization.InternalSerializationApi
-import okhttp3.Response
-
-@file:OptIn(InternalSerializationApi::class)
+import java.io.IOException
+import retrofit2.HttpException
+import retrofit2.Response
 
 sealed interface StatusUIDetail {
     data class Success(val satusiswa: DataSiswa) : StatusUIDetail
@@ -33,18 +36,18 @@ class DetailViewModel (savedStateHandle: SavedStateHandle, private val repositor
         viewModelScope.launch {
             statusUIDetail = StatusUIDetail.Loading
             statusUIDetail = try {
-                statusUIDetail.Success(satusiswa = repositoryDataSiswa.getSatuSiswa(idSiswa))
+                StatusUIDetail.Success(satusiswa = repositoryDataSiswa.getSatuSiswa(idSiswa))
             }
-            catch (e: Exception){
-                statusUIDetail.Error
+            catch (e: IOException){
+                StatusUIDetail.Error
             }
-            catch (e: Exception){
-                statusUIDetail.Error
+            catch (e: HttpException){
+                StatusUIDetail.Error
             }
         }
     }
 
-    @SuppressLint("SuspiciouseIndentation")
+    @SuppressLint("SuspiciousIndentation")
     suspend fun hapusSatuSiswa(){
         val resp: Response<Void> = repositoryDataSiswa.hapusSatuSiswa(idSiswa)
 
