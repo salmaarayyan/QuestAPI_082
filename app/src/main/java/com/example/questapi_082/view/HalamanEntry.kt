@@ -63,7 +63,7 @@ fun EntrySiswaScreen(
 
 @Composable
 fun EntrySiswaBody(
-    uiStateSiswa: UiStateSiswa,
+    uiStateSiswa: UIStateSiswa,
     onSiswaValueChange: (DetailSiswa) -> Unit,
     onSaveClick: () -> Unit,
     modifier: Modifier = Modifier
