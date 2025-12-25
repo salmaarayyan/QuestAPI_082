@@ -1,6 +1,8 @@
 package com.example.questapi_082.view
 
 import android.graphics.drawable.Icon
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -74,5 +76,10 @@ private fun BodyDetailDataSiswa(
     onDelete: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    Column(
+        modifier = modifier.padding(dimensionResource(id = R.dimen.padding_medium)),
+        verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_medium))
+    ) {
 
+    }
 }
