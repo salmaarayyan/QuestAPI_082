@@ -9,6 +9,11 @@ import com.example.questapi_082.modeldata.UIStateSiswa
 import com.example.questapi_082.modeldata.toUiStateSiswa
 import com.example.questapi_082.repositori.RepositoryDataSiswa
 import retrofit2.Response
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.questapi_082.modeldata.toDataSiswa
+import com.example.questapi_082.uicontroller.route.DestinasiDetail
+import kotlinx.coroutines.launch
 
 class EditViewModel(savedStateHandle: SavedStateHandle, private val repositoryDataSiswa: RepositoryDataSiswa): ViewModel(){
     var uiStateSiswa by mutableStateOf(UIStateSiswa())
@@ -23,10 +28,10 @@ class EditViewModel(savedStateHandle: SavedStateHandle, private val repositoryDa
     }
 
     fun updateUiState(detailSiswa: DetailSiswa){
-        uiStateSiswa = UIStateSiswa(detailSiswa = detailSiswa, isEntryValid = validasiInput(detailSiswa)))
+        uiStateSiswa = UIStateSiswa(detailSiswa = detailSiswa, isEntryValid = validasiInput(detailSiswa))
     }
 
-    private fun validasiInput(uiState: DetailSiswa = UIStateSiswa.detailSiswa): Boolean {
+    private fun validasiInput(uiState: DetailSiswa = uiStateSiswa.detailSiswa): Boolean {
         return with(uiState){
             nama.isNotBlank() && alamat.isNotBlank() && telpon.isNotBlank()
         }
