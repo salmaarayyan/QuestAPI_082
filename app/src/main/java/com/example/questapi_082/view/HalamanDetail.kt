@@ -1,10 +1,13 @@
 package com.example.questapi_082.view
 
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.questapi_082.R
 import com.example.questapi_082.viewmodel.DetailViewModel
 import com.example.questapi_082.viewmodel.provider.PenyediaViewModel
 
@@ -24,6 +27,15 @@ fun DetailSiswaScreen(
                 navigateUp = navigateBack
             )
         },
+        floatingActionButton = {
+            val uiState = viewModel.statusUIDetail
+            FloatingActionButton(
+                onClick = {
+                    when(uiState){ is StatusUIDetail.Success->navigateToEditItem(uiState.satatusiswa.id) else->{}}
+                },
+                shape = MaterialTheme.shapes.medium,
+                modifier = Modifier.padding(dimensionResource(R.dimen.padding_large))
+        }
 
 
     )
