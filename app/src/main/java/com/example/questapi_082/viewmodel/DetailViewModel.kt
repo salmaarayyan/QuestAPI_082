@@ -1,5 +1,6 @@
 package com.example.questapi_082.viewmodel
 
+import android.annotation.SuppressLint
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -10,6 +11,7 @@ import com.example.questapi_082.modeldata.DataSiswa
 import com.example.questapi_082.repositori.RepositoryDataSiswa
 import kotlinx.coroutines.launch
 import kotlinx.serialization.InternalSerializationApi
+import okhttp3.Response
 
 @file:OptIn(InternalSerializationApi::class)
 
@@ -39,6 +41,17 @@ class DetailViewModel (savedStateHandle: SavedStateHandle, private val repositor
             catch (e: Exception){
                 statusUIDetail.Error
             }
+        }
+    }
+
+    @SuppressLint("SuspiciouseIndentation")
+    suspend fun hapusSatuSiswa(){
+        val resp: Response<Void> = repositoryDataSiswa.hapusSatuSiswa(idSiswa)
+
+        if(resp.isSuccessful){
+            println("Sukses Hapus Data : ${resp.message()}")
+        }else{
+            println("Gagal Hapus Data : ${resp.errorBody()}")
         }
     }
 }
